@@ -1,0 +1,28 @@
+
+target/
+logs/
+
+# Environnement virtuel
+dbt_env/
+.env 
+
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# dbt
+.user.yml
+dbt_packages/
+
+# duckdb
+*.duckdb
+*.duckdb.wal
+
+# Éditeurs
+.vscode/
+.idea/
