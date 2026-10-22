@@ -3,7 +3,14 @@ version: 2
 
 models:
   - name: my_first_dbt_model
-    description: "A starter dbt model"
+    config:
+      description: "A starter dbt model"
+      schema: |
+          {%- if  target.name == "dev" -%} raw_dev
+          {%- elif target.name == "prod"  -%} raw_prod
+          {%- elif target.name == "test"  -%} raw_test
+          {%- else -%} invalid_database
+          {%- endif -%}
     columns:
       - name: id
         description: "The primary key for this table"
@@ -12,10 +19,18 @@ models:
           - not_null
 
   - name: my_second_dbt_model
-    description: "A starter dbt model"
+    config:
+      description: "A starter dbt model"
+      schema: |
+        {%- if  target.name == "dev" -%}    analytics_dev
+        {%- elif target.name == "prod"  -%} analytics_prod
+        {%- elif target.name == "test"  -%} analytics_test
+        {%- else -%} invalid_database
+        {%- endif -%}
     columns:
       - name: id
         description: "The primary key for this table"
         data_tests:
           - unique
           - not_null
+
